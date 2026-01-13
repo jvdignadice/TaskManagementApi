@@ -1,25 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using taskmanagement.api.ms.Data;
 using taskmanagement.api.ms.DTOs;
+using taskmanagement.api.ms.Interfaces;
 using taskmanagement.api.ms.Models;
 using taskmanagement.api.ms.Models.Enums;
+using taskmanagement.api.ms.domain.Database;
 
 namespace taskmanagement.api.ms.Controllers
 {
     [ApiController]
-    [Route("api/tasks")]
+    [Route("task-management")]
     public class TasksController : ControllerBase
     {
-        private readonly TaskManagementDbContext _context;
-
-        public TasksController(TaskManagementDbContext context)
+        private readonly ITaskManagementService _taskManagementService;
+        private readonly TaskManagementAppDbContext _context;
+        public TasksController(ITaskManagementService taskManagementService, TaskManagementAppDbContext context)
         {
+            _taskManagementService = taskManagementService;
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("getTaskAsyncWithPagination")]
         public async Task<IActionResult> GetTasks(
             int page = 1,
             int pageSize = 10,
@@ -51,24 +53,14 @@ namespace taskmanagement.api.ms.Controllers
             return Ok(new { total, tasks });
         }
 
-        [HttpPost]
+        [HttpPost("addTaskAsync")]
         public async Task<IActionResult> CreateTask(CreateTaskDto dto)
         {
-            var task = new TaskItem
-            {
-                Title = dto.Title,
-                Description = dto.Description,
-                Priority = dto.Priority,
-                DueDate = dto.DueDate
-            };
-
-            _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetTaskById), new { id = task.Id }, task);
+            var task =  await _taskManagementService.CreateTaskAsync(dto);
+            return Ok(task);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetTaskByIdAsync")]
         public async Task<IActionResult> GetTaskById(int id)
         {
             var task = await _context.Tasks.FindAsync(id);
@@ -92,7 +84,7 @@ namespace taskmanagement.api.ms.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "RemoveTaskAsync")]
         public async Task<IActionResult> DeleteTask(int id)
         {
             var task = await _context.Tasks.FindAsync(id);

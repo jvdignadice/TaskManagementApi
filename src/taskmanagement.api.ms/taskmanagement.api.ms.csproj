@@ -22,7 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\taskmanagement.api.ms.domain\taskmanagement.api.ms.domain.csproj" />
+    <ProjectReference Include="..\taskmanagement.api.ms.infrastructure\taskmanagement.api.ms.infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

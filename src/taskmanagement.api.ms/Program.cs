@@ -1,21 +1,25 @@
 using Microsoft.EntityFrameworkCore;
 using System;
-using taskmanagement.api.ms.Data;
+using taskmanagement.api.ms.domain.Database;
+using taskmanagement.api.ms.domain.Interface;
+using taskmanagement.api.ms.domain.Service;
+using taskmanagement.api.ms.infrastructure.DependencyInjection;
+using taskmanagement.api.ms.Interfaces;
+using taskmanagement.api.ms.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddDbContext<TaskManagementDbContext>(options =>
+builder.Services.AddDbContext<TaskManagementAppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DbConnection")));
 
+builder.Services.AddInfrastructureServices();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ITaskManagementService, TaskManagementService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -23,7 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<TaskManagementDbContext>();
+    var db = scope.ServiceProvider.GetRequiredService<TaskManagementAppDbContext>();
     db.Database.EnsureCreated();
 }
 app.UseHttpsRedirection();

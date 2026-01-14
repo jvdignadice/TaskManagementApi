@@ -9,6 +9,7 @@ namespace taskmanagement.api.ms.infrastructure.DependencyInjection
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<ITaskExportService, TaskExportService>();
             return services;
         }
     }

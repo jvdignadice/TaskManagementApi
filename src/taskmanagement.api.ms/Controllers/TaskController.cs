@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using taskmanagement.api.ms.domain.Database;
+using taskmanagement.api.ms.domain.Service;
 using taskmanagement.api.ms.DTOs;
 using taskmanagement.api.ms.Interfaces;
 using taskmanagement.api.ms.Models.Enums;
-using taskmanagement.api.ms.domain.Database;
 
 namespace taskmanagement.api.ms.Controllers
 {
@@ -12,9 +14,11 @@ namespace taskmanagement.api.ms.Controllers
     public class TasksController : ControllerBase
     {
         private readonly ITaskManagementService _taskManagementService;
-        public TasksController(ITaskManagementService taskManagementService, TaskManagementAppDbContext context)
+        private readonly ITaskExportService _taskExportService;
+        public TasksController(ITaskManagementService taskManagementService, ITaskExportService taskExportService)
         {
             _taskManagementService = taskManagementService;
+            _taskExportService = taskExportService;
         }
 
         [HttpGet]
@@ -30,6 +34,13 @@ namespace taskmanagement.api.ms.Controllers
         {
             var task =  await _taskManagementService.CreateTaskAsync(dto);
             return Ok(task);
+        }
+        [HttpGet("export")]
+        public async Task<IActionResult> ExportTasks()
+        {
+            var csv = await _taskExportService.ExportTasksToCsvAsync();
+            var bytes = Encoding.UTF8.GetBytes(csv);
+            return File(bytes, "text/csv", "tasks.csv");
         }
 
         [HttpGet("{id}")]

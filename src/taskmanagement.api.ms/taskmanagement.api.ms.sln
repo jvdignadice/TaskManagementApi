@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taskmanagement.api.ms", "taskmanagement.api.ms.csproj", "{4D099570-10E0-4B63-A305-AF406B212A60}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taskmanagement.api.ms.domain", "..\taskmanagement.api.ms.domain\taskmanagement.api.ms.domain.csproj", "{5A48F140-A3EB-41C3-BD9F-77C8DAAB053F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taskmanagement.api.ms.infrastructure", "..\taskmanagement.api.ms.infrastructure\taskmanagement.api.ms.infrastructure.csproj", "{5CA0D876-CE03-4399-B9CD-4486ED03084F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{93B3DF9B-0D54-4305-BA8E-E7FAEC40B001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taskmanagement.api.test", "..\..\test\taskmanagement.api.test\taskmanagement.api.test.csproj", "{E0835510-928E-43F4-8AC2-4032D665AE19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,10 @@ Global
 		{5CA0D876-CE03-4399-B9CD-4486ED03084F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CA0D876-CE03-4399-B9CD-4486ED03084F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CA0D876-CE03-4399-B9CD-4486ED03084F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0835510-928E-43F4-8AC2-4032D665AE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0835510-928E-43F4-8AC2-4032D665AE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0835510-928E-43F4-8AC2-4032D665AE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0835510-928E-43F4-8AC2-4032D665AE19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +45,7 @@ Global
 		{4D099570-10E0-4B63-A305-AF406B212A60} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{5A48F140-A3EB-41C3-BD9F-77C8DAAB053F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{5CA0D876-CE03-4399-B9CD-4486ED03084F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{E0835510-928E-43F4-8AC2-4032D665AE19} = {93B3DF9B-0D54-4305-BA8E-E7FAEC40B001}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7AFE358D-18C3-44FA-8842-C543B21D0105}

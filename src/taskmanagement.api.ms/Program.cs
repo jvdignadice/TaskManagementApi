@@ -18,7 +18,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITaskManagementService, TaskManagementService>();
-// Add CORS service
+/* 
+Add CORS service
+for the sake of this assessment I will not mask the Front end
+url, please modify the url depending of what it makes on your local ("http://localhost:5175")
+*/
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>

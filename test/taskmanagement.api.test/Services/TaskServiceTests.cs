@@ -32,7 +32,7 @@ namespace TaskManagement.Tests
             {
                 Title = "New Task",
                 Description = "Test Description",
-                Priority = TaskPriority.Medium,
+                Priority = (int)TaskPriority.Medium,
                 DueDate = DateTime.UtcNow.AddDays(2)
             };
 
@@ -68,7 +68,7 @@ namespace TaskManagement.Tests
             A.CallTo(() => _tasksFake.FindAsync(1)).Returns(new ValueTask<TaskItem>(existingTask));
             A.CallTo(() => _dbContextFake.SaveChangesAsync(CancellationToken.None)).Returns(Task.FromResult(1));
 
-            var dto = new UpdateTaskDto { Title = "Updated", Description = "Updated Desc", Priority = TaskPriority.High, Status = TasksStatus.Pending, DueDate = DateTime.UtcNow };
+            var dto = new UpdateTaskDto { Title = "Updated", Description = "Updated Desc", Priority = (int)TaskPriority.High, Status = TasksStatus.Pending, DueDate = DateTime.UtcNow };
 
             var result = await _taskService.UpdateTask(1, dto);
 

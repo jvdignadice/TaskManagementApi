@@ -6,7 +6,7 @@ namespace taskmanagement.api.ms.DTOs
     {
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
-        public TaskPriority Priority { get; set; }
+        public int Priority { get; set; }
         public DateTime? DueDate { get; set; }
     }
 }

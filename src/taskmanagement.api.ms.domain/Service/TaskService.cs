@@ -23,7 +23,7 @@ namespace taskmanagement.api.ms.domain.Service
             {
                 Title = dto.Title,
                 Description = dto.Description,
-                Priority = dto.Priority,
+                Priority = (TaskPriority)dto.Priority,
                 DueDate = dto.DueDate
             };
 
@@ -39,7 +39,7 @@ namespace taskmanagement.api.ms.domain.Service
 
             task.Title = dto.Title;
             task.Description = dto.Description;
-            task.Priority = dto.Priority;
+            task.Priority = (TaskPriority)dto.Priority;
             task.Status = dto.Status;
             task.DueDate = dto.DueDate;
             task.UpdatedAt = DateTime.UtcNow;
